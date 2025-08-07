@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latihan_div/pages/auth/login_screen.dart';
+import 'package:latihan_div/pages/menu_screen.dart';
 import 'package:latihan_div/pages/posts/list_post_screen.dart';
 import 'package:latihan_div/services/auth_service.dart';
 
@@ -43,7 +44,7 @@ class _AuthCheckState extends State<AuthCheck> {
             body: Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasData && snapshot.data == true) {
-          return const ListPostScreen();
+          return const MenuScreen();
         } else {
           return LoginScreen();
         }

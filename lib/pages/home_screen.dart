@@ -1,25 +1,27 @@
- // home_screen.dart
- import 'package:flutter/material.dart';
- import 'package:latihan_div/services/auth_service.dart';
- import 'package:latihan_div/pages/auth/login_screen.dart';
- class HomeScreen extends StatelessWidget {
-  final AuthService _authService = AuthService();
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () async {
-              await _authService.logout();
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => LoginScreen()));
-            },
-          )
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.dashboard, size: 80, color: Colors.blue),
+            SizedBox(height: 20),
+            Text(
+              'Selamat Datang di Dashboard',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+              
+            ),
+            SizedBox(height: 10),
+          ],
+        ),
       ),
-      body: Center(child: Text("Selamat datang di halaman Home!")),
     );
   }
- }
+}

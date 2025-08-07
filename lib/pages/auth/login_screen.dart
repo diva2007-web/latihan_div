@@ -1,67 +1,94 @@
-// login_screen.dart
-import 'package:flutter/material.dart';
-import 'package:latihan_div/pages/auth/login_screen.dart';
-import 'package:latihan_div/pages/home_screen.dart';
-import 'package:latihan_div/services/auth_service.dart';
+import 'dart:ui';
+
+import 'package:flutter/material.dart'
+    show
+        AppBar,
+        BuildContext,
+        Colors,
+        Column,
+        Container,
+        EdgeInsets,
+        ElevatedButton,
+        InputDecoration,
+        MaterialApp,
+        MaterialPageRoute,
+        Navigator,
+        Scaffold,
+        ScaffoldMessenger,
+        SnackBar,
+        State,
+        StatefulWidget,
+        Text,
+        TextButton,
+        TextEditingController,
+        TextField,
+        Widget;
+
 import 'package:latihan_div/pages/auth/register_screen.dart';
+import 'package:latihan_div/pages/menu_screen.dart';
+import 'package:latihan_div/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
+  LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final emailController = TextEditingController();
-
-  final passwordController = TextEditingController();
-
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Login")),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                bool success = await _authService.login(
-                  emailController.text,
-                  passwordController.text,
-                );
-                if (success) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => HomeScreen()),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Login Page')),
+        body: Container(
+          color: const Color.fromARGB(255, 255, 255, 255),
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              TextField(
+                controller: passwordController,
+                decoration: InputDecoration(labelText: 'Password'),
+                obscureText: true,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  bool success = await _authService.login(
+                    password: passwordController.text,
+                    email: emailController.text,
                   );
-                } else {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text('Login gagal')));
-                }
-              },
-              child: Text("Login"),
-            ),
-            TextButton(
-              onPressed:
-                  () => Navigator.push(
+                  if (success) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => MenuScreen()),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text('Login Gagal')));
+                  }
+                },
+                child: Text('Login'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (_) => RegisterScreen()),
-                  ),
-              child: Text("Belum punya akun? Daftar"),
-            ),
-          ],
+                  );
+                },
+                child: Text('Belum punya akun? Daftar di sini'),
+              ),
+            ],
+          ),
         ),
       ),
     );

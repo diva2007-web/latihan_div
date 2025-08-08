@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:latihan_div/pages/doa/list_doa_screen.dart';
+import 'package:latihan_div/pages/ganjil/list_ganjil_screen..dart';
 import 'package:latihan_div/pages/home_screen.dart';
 import 'package:latihan_div/pages/posts/list_post_screen.dart';
 import 'package:latihan_div/pages/product/product_list_screen.dart';
@@ -17,6 +19,8 @@ class _MenuScreenState extends State<MenuScreen> {
   final List<Widget> _pages = [
     HomeScreen(), // Ganti dari Center(text: ...) ke HomeScreen()
     ListPostScreen(),
+    ListDoaScreen(),
+    ListGanjilScreen(),
     ProductListScreen(),
     ProfileScreen(),
   ];
@@ -36,6 +40,9 @@ class _MenuScreenState extends State<MenuScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
           BottomNavigationBarItem(icon: Icon(Icons.article), label: 'Posts'),
+          BottomNavigationBarItem(icon: Icon(Icons.article), label: 'Doa'),
+          BottomNavigationBarItem(icon: Icon(Icons.article), label: 'Ganjil'),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Produk',
